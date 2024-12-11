@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>视频压缩算法简介 | 欢迎来到马劲柏的博客</title><meta name="author" content="马劲柏"><meta name="copyright" content="马劲柏"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="视频压缩算法简介视频压缩技术是将视频文件的数据量降低的过程，主要通过去除冗余信息来减少文件的大小。视频压缩的目的不仅是为了节省存储空间，还能提高传输效率。压缩技术一般可以分为有损压缩和无损压缩，其中有损压缩通常用于视频文件的传输和存储，以便在保证视频质量的情况下减少文件的大小。常见的视频压缩标准包括H.264、H.265、VP8等。通常我们在网络上见到的视频都要经过以下几个步骤的处理才最终被用户看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视频压缩算法简介">
+<meta property="og:url" content="http://example.com/2024/12/11/SHIPIN/index.html">
+<meta property="og:site_name" content="欢迎来到马劲柏的博客">
+<meta property="og:description" content="视频压缩算法简介视频压缩技术是将视频文件的数据量降低的过程，主要通过去除冗余信息来减少文件的大小。视频压缩的目的不仅是为了节省存储空间，还能提高传输效率。压缩技术一般可以分为有损压缩和无损压缩，其中有损压缩通常用于视频文件的传输和存储，以便在保证视频质量的情况下减少文件的大小。常见的视频压缩标准包括H.264、H.265、VP8等。通常我们在网络上见到的视频都要经过以下几个步骤的处理才最终被用户看">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/people-icon.png">
+<meta property="article:published_time" content="2024-12-11T08:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-11T03:38:58.798Z">
+<meta property="article:author" content="马劲柏">
+<meta property="article:tag" content="压缩编码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/people-icon.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/12/11/SHIPIN/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '视频压缩算法简介',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/1.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/people-icon.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">欢迎来到马劲柏的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">视频压缩算法简介</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">视频压缩算法简介</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-11T08:00:00.000Z" title="发表于 2024-12-11 16:00:00">2024-12-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-11T03:38:58.798Z" title="更新于 2024-12-11 11:38:58">2024-12-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="视频压缩算法简介"><a href="#视频压缩算法简介" class="headerlink" title="视频压缩算法简介"></a>视频压缩算法简介</h2><p>视频压缩技术是将视频文件的数据量降低的过程，主要通过去除冗余信息来减少文件的大小。视频压缩的目的不仅是为了节省存储空间，还能提高传输效率。压缩技术一般可以分为有损压缩和无损压缩，其中有损压缩通常用于视频文件的传输和存储，以便在保证视频质量的情况下减少文件的大小。常见的视频压缩标准包括H.264、H.265、VP8等。<br>通常我们在网络上见到的视频都要经过以下几个步骤的处理才最终被用户看到。<br><img src="/img/vedioprr.png" alt="网络视频传输处理流程"></p>
+<h3 id="视频压缩的主要步骤"><a href="#视频压缩的主要步骤" class="headerlink" title="视频压缩的主要步骤"></a>视频压缩的主要步骤</h3><p>视频压缩算法的工作原理通常可以分为以下几个步骤：</p>
+<ol>
+<li><p><strong>帧间预测与帧内预测</strong><br>视频帧是由静态图像组成的，连续的视频帧之间有很多相似的信息。视频压缩的关键之一是通过帧间预测来减少这些冗余信息。帧间预测利用前一帧或后一帧的信息来估算当前帧的内容，这样可以有效减少数据量。此外，视频编码还通过帧内预测来利用同一帧内的冗余信息。</p>
+</li>
+<li><p><strong>离散余弦变换（DCT）</strong><br>类似于JPEG图像压缩，视频压缩中也使用离散余弦变换（DCT）将图像数据从空间域转到频率域。DCT能够有效地分离视频中的低频和高频成分，低频成分通常包含主要信息，而高频成分则代表细节和噪声。视频压缩通常会对高频成分进行更多的量化，从而减少数据量。</p>
+</li>
+<li><p><strong>量化</strong><br>量化是视频压缩的一个重要步骤，通过将频域信息映射到较小的离散值来减少数据量。量化的过程会丢失一些图像信息，但这些丢失的信息对人眼的感知影响较小，因此量化有助于提高压缩效率。</p>
+</li>
+<li><p><strong>熵编码</strong><br>熵编码（如霍夫曼编码和算术编码）是视频压缩中的最后一步，它根据符号的出现频率将其编码为较短的二进制码。熵编码不仅能减少冗余数据，还能在压缩时保留更多的信息细节，从而提高压缩效率。</p>
+</li>
+<li><p><strong>运动估计与补偿</strong><br>运动估计用于检测和估算视频帧之间的运动，通常通过搜索运动矢量来表示图像的变化。运动补偿通过根据估算的运动矢量预测当前帧的内容，从而减小帧间差异，提高压缩效率。<br><img src="/img/vedio.png" alt="视频压缩示意图"></p>
+</li>
+</ol>
+<h3 id="有损压缩与无损压缩"><a href="#有损压缩与无损压缩" class="headerlink" title="有损压缩与无损压缩"></a>有损压缩与无损压缩</h3><p>视频压缩有两种主要的方式：<strong>有损压缩</strong>和<strong>无损压缩</strong>。有损压缩通常会丢失部分视频数据，这样可以大幅降低文件的大小，适用于大多数日常视频应用（如流媒体传输、视频播放等）。例如，H.264和H.265等常用的视频编码格式就是有损压缩标准。相比之下，<strong>无损压缩</strong>会尽可能保留视频中的所有信息，适用于对质量要求极高的场景，如医学影像和视频编辑等领域，但压缩比通常较低。</p>
+<h3 id="压缩质量的控制"><a href="#压缩质量的控制" class="headerlink" title="压缩质量的控制"></a>压缩质量的控制</h3><p>视频压缩中的<strong>比特率</strong>（Bitrate）是控制压缩质量的主要因素。较高的比特率意味着更高的视频质量和更大的文件大小，而较低的比特率则会减少视频质量。通过调节比特率，可以在视频质量和文件大小之间找到平衡。例如，在流媒体应用中，较低的比特率可能会导致视频画质的损失，但可以有效减少带宽的需求。</p>
+<h3 id="视频压缩的应用场景"><a href="#视频压缩的应用场景" class="headerlink" title="视频压缩的应用场景"></a>视频压缩的应用场景</h3><p>视频压缩技术广泛应用于多种场景，主要包括：</p>
+<ul>
+<li><strong>视频流媒体传输</strong>：如Netflix、YouTube等流媒体平台通过压缩视频来减少传输带宽，提高加载速度和观看体验。</li>
+<li><strong>视频存储</strong>：为了节省存储空间，视频文件通常会进行压缩，尤其是高清或4K视频。</li>
+<li><strong>视频会议</strong>：视频会议系统采用视频压缩技术来保证视频流畅传输，同时节省带宽。</li>
+<li><strong>视频监控</strong>：视频监控系统也采用压缩技术，确保视频存储和传输的高效性。</li>
+</ul>
+<h3 id="视频压缩算法的优缺点"><a href="#视频压缩算法的优缺点" class="headerlink" title="视频压缩算法的优缺点"></a>视频压缩算法的优缺点</h3><p><strong>优点：</strong></p>
+<ul>
+<li><strong>高压缩率</strong>：视频压缩算法能够显著减少视频文件的大小，适用于大规模视频存储和传输。</li>
+<li><strong>提高传输效率</strong>：通过压缩，视频传输所需的带宽可以大幅减少，提高了流媒体服务的质量和效率。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li><strong>有损压缩</strong>：尽管压缩后的视频质量损失较小，但对于一些专业领域（如视频编辑或医学影像）来说，质量损失可能是不可接受的。</li>
+<li><strong>压缩延迟</strong>：视频压缩需要计算资源，在实时压缩或低延迟应用中可能会带来延迟。</li>
+</ul>
+<h3 id="常见的视频压缩标准"><a href="#常见的视频压缩标准" class="headerlink" title="常见的视频压缩标准"></a>常见的视频压缩标准</h3><ol>
+<li><strong>H.264&#x2F;AVC</strong>：最常用的视频压缩标准，广泛应用于互联网视频、电视广播、光盘存储等领域。</li>
+<li><strong>H.265&#x2F;HEVC</strong>：相比H.264，H.265能提供更高的压缩率，适用于4K视频和高质量视频的存储与传输。</li>
+<li><strong>VP8&#x2F;VP9</strong>：由Google开发的开源视频压缩标准，广泛应用于WebM视频格式和YouTube等平台。</li>
+<li><strong>AV1</strong>：是最新的视频压缩标准，旨在提供比H.265更高的压缩效率，且免费开源，适用于高效视频流媒体和视频存储。</li>
+</ol>
+<hr>
+<h2 id="现在来动手试一试吧！"><a href="#现在来动手试一试吧！" class="headerlink" title="现在来动手试一试吧！"></a>现在来动手试一试吧！</h2>
+<form id="upload-form">
+  <label for="file-input">选择视频上传并压缩:</label>
+  <input type="file" id="file-input" name="file" accept="video/*" required />
+  <button type="submit">上传并压缩</button>
+</form>
+
+<div id="result" style="display:none;">
+  <h2>压缩完成！</h2>
+  <a id="download-link" href="" target="_blank">点击下载压缩后的视频</a>
+  <p>压缩率: <span id="compression-rate"></span>%</p>
+</div>
+
+<div id="loading" style="display:none;">
+  <p>正在上传并压缩视频，请稍等...</p>
+</div>
+
+<script>
+  document.getElementById('upload-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    
+    const fileInput = document.getElementById('file-input');
+    const file = fileInput.files[0];
+    if (!file) {
+      alert("请先选择一个文件！");
+      return;
+    }
+
+    // 显示加载提示
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('result').style.display = 'none';  // 隐藏结果部分
+
+    // 创建 FormData 对象，准备上传文件
+    const formData = new FormData();
+    formData.append("file", file);
+
+    // 调用后端服务进行视频上传和压缩
+    fetch('http://127.0.0.1:5000/upload', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject("服务器返回错误: " + response.statusText);  // 如果响应不成功，抛出错误
+      }
+      return response.json();  // 使用 .json() 解析响应数据
+    })
+    .then(data => {
+      // 打印后端返回的数据，检查 download_link 是否有效
+      console.log(data);  
+
+      if (data && data.download_link && typeof data.download_link === 'string' && data.compression_rate !== undefined) {
+        // 拼接下载链接
+        const downloadLink = "http://127.0.0.1:5000" + data.download_link;  
+        document.getElementById('download-link').href = downloadLink;
+        document.getElementById('compression-rate').textContent = data.compression_rate.toFixed(2);  // 显示压缩率，保留两位小数
+        document.getElementById('result').style.display = 'block';
+      } else {
+        alert("获取下载链接失败，请重试！");
+      }
+    })
+    .catch(error => {
+      console.error(error);  // 打印错误，便于调试
+      alert('发生错误：' + error);
+    })
+    .finally(() => {
+      document.getElementById('loading').style.display = 'none';  // 隐藏加载提示
+    });
+  });
+</script>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">马劲柏</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/12/11/SHIPIN/">http://example.com/2024/12/11/SHIPIN/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">欢迎来到马劲柏的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8E%8B%E7%BC%A9%E7%BC%96%E7%A0%81/">压缩编码</a></div><div class="post-share"><div class="social-share" data-image="/img/people-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2024/12/11/tupian/" title="JPEG 图像压缩算法简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">JPEG 图像压缩算法简介</div></div><div class="info-2"><div class="info-item-1">JPEG 图像压缩算法简介 JPEG（Joint Photographic Experts...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2024/12/11/tupian/" title="JPEG 图像压缩算法简介"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-11</div><div class="info-item-2">JPEG 图像压缩算法简介</div></div><div class="info-2"><div class="info-item-1">JPEG 图像压缩算法简介 JPEG（Joint Photographic Experts...</div></div></div></a><a class="pagination-related" href="/2024/12/11/yasuobiaozhun/" title="音频、图像与视频压缩标准概述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-12-11</div><div class="info-item-2">音频、图像与视频压缩标准概述</div></div><div class="info-2"><div class="info-item-1">音频压缩标准音频压缩标准通过减少音频文件的大小而尽量保持音质，广泛用于流媒体传输、存储和实时通信。音频压缩可以分为有损压缩和无损压缩两类。有损压缩（如MP3和AAC）通过去除人耳不敏感的声音细节来实现高压缩率，适用于大多数日常音频需求；而无损压缩（如FLAC）则保留原始音频信息，适合专业音频制作和高保真音乐存储。 主要音频压缩标准 MP3MP3是最早流行的有损音频压缩格式，通过心理声学模型去除不易察觉的音频信息，以减少文件大小，广泛应用于音乐存储和分享。它具有高兼容性，几乎所有音乐播放器和移动设备都支持MP3。  AACAAC是MP3的改进版本，利用更高效的编码技术提供更好的音质和压缩比。它被广泛用于流媒体和数字广播，如Apple...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/people-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">马劲柏</div><div class="author-info-description">这是马劲柏的个人博客</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xxxxxx" target="_blank" title="Github"><i class="fab fa-github" style="color: Github;"></i></a><a class="social-icon" href="mailto:xxxxxx@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: Email;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">视频压缩算法简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%9A%84%E4%B8%BB%E8%A6%81%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">视频压缩的主要步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E6%8D%9F%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%97%A0%E6%8D%9F%E5%8E%8B%E7%BC%A9"><span class="toc-number">1.2.</span> <span class="toc-text">有损压缩与无损压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9%E8%B4%A8%E9%87%8F%E7%9A%84%E6%8E%A7%E5%88%B6"><span class="toc-number">1.3.</span> <span class="toc-text">压缩质量的控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">1.4.</span> <span class="toc-text">视频压缩的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">1.5.</span> <span class="toc-text">视频压缩算法的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%86%E9%A2%91%E5%8E%8B%E7%BC%A9%E6%A0%87%E5%87%86"><span class="toc-number">1.6.</span> <span class="toc-text">常见的视频压缩标准</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E5%9C%A8%E6%9D%A5%E5%8A%A8%E6%89%8B%E8%AF%95%E4%B8%80%E8%AF%95%E5%90%A7%EF%BC%81"><span class="toc-number">2.</span> <span class="toc-text">现在来动手试一试吧！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#result"><span class="toc-number">3.</span> <span class="toc-text">压缩完成！</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/11/SHIPIN/" title="视频压缩算法简介">视频压缩算法简介</a><time datetime="2024-12-11T08:00:00.000Z" title="发表于 2024-12-11 16:00:00">2024-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/11/tupian/" title="JPEG 图像压缩算法简介">JPEG 图像压缩算法简介</a><time datetime="2024-12-11T08:00:00.000Z" title="发表于 2024-12-11 16:00:00">2024-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/11/life1/" title="自我介绍">自我介绍</a><time datetime="2024-12-11T08:00:00.000Z" title="发表于 2024-12-11 16:00:00">2024-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/11/yasuobiaozhun/" title="音频、图像与视频压缩标准概述">音频、图像与视频压缩标准概述</a><time datetime="2024-12-11T08:00:00.000Z" title="发表于 2024-12-11 16:00:00">2024-12-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/10/hello-world/" title="Hello World">Hello World</a><time datetime="2024-12-10T08:58:52.319Z" title="发表于 2024-12-10 16:58:52">2024-12-10</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 - 2024 By 马劲柏</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">很高兴见到你😊</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const isShuoshuo = GLOBAL_CONFIG_SITE.isShuoshuo
+  const option = null
+
+  const initValine = (el, path) => {
+    if (isShuoshuo) {
+      window.shuoshuoComment.destroyValine = () => {
+        if (el.children.length) {
+          el.innerHTML = ''
+          el.classList.add('no-comment')
+        }
+      }
+    }
+
+    const valineConfig = {
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      visitor: false,
+      ...option,
+      path: isShuoshuo ? path : (option && option.path) || window.location.pathname
+    }
+
+    new Valine(valineConfig)
+  }
+
+  const loadValine = async (el, path) => {
+    if (typeof Valine === 'function') {
+      initValine(el, path)
+    } else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine(el, path)
+    }
+  }
+
+  if (isShuoshuo) {
+    'Valine' === 'Valine'
+      ? window.shuoshuoComment = { loadComment: loadValine }
+      : window.loadOtherComment = loadValine
+    return
+  }
+
+  if ('Valine' === 'Valine' || !false) {
+    if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><!-- APlayer 音乐播放器 -->
+<div id="aplayer" class="aplayer no-destroy" data-id="60198" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"></div>
+<script>
+  window.onload = function() {
+    if (typeof APlayer !== 'undefined') {
+      var ap = new APlayer({
+        element: document.getElementById('aplayer'),
+        autoplay: true,  // 是否自动播放
+        showlrc: false,  // 是否显示歌词
+        mutex: true,     // 防止多个播放器同时播放
+        theme: '#FF3B30', // 播放器主题色
+        volume: 0.5,     // 默认音量
+        mode: 'circle',  // 播放模式，循环播放
+        preload: 'auto', // 自动预加载音频
+        listMaxHeight: '400px', // 歌单最大高度
+        music: [{
+          id: 60198,           // 歌曲 ID
+          server: 'netease',   // 音乐源
+          type: 'playlist',    // 播放列表类型
+          url: '/music/danche.mp3', // 音乐文件路径，确保文件在 source/music/ 目录下
+          title: '单车',        // 歌曲标题
+          author: '作者名称',    // 歌手名称
+        }]
+      });
+    }
+  };
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script>(() => {
+  const destroyAplayer = () => {
+    if (window.aplayers) {
+      for (let i = 0; i < window.aplayers.length; i++) {
+        if (!window.aplayers[i].options.fixed) {
+          window.aplayers[i].destroy()
+        }
+      }
+    }
+  }
+
+  const runMetingJS = () => {
+    typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+  }
+
+  btf.addGlobalFn('pjaxSend', destroyAplayer, 'destroyAplayer')
+  btf.addGlobalFn('pjaxComplete', loadMeting, 'runMetingJS')
+})()</script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
